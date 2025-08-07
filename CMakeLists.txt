@@ -35,9 +35,6 @@ set_target_properties(${PROJECT_NAME} async PROPERTIES
     CXX_STANDARD_REQUIRED ON
 )
 
-# uncomment for inplace debug
-# add_compile_definitions(DEBUG_ON)
-
 #
 target_include_directories(${PROJECT_NAME}
 PUBLIC
