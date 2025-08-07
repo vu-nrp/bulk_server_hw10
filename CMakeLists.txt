@@ -30,6 +30,7 @@ add_executable(${PROJECT_NAME}
     server/bulkserver.cpp
 )
 
+#
 set_target_properties(${PROJECT_NAME} async PROPERTIES
     CXX_STANDARD 17
     CXX_STANDARD_REQUIRED ON
