@@ -11,7 +11,7 @@
 class Dispatcher
 {
 public:
-    Dispatcher(const size_t bulkSize);
+    explicit Dispatcher(const size_t bulkSize);
     virtual ~Dispatcher();
 
     static void disconnectStatic();

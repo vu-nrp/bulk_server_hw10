@@ -38,9 +38,8 @@ std::string packToString(const CommandsPack &pack, const std::string &delim)
 class Context
 {
 public:
-    using Shared = std::shared_ptr<Context>;
 
-    Context(const size_t &n);
+    explicit Context(const size_t &n);
 
     void processData(const char *dataBlock, const size_t &dataBlockSize)
     {
@@ -65,13 +64,15 @@ private:
 
 };
 
+using ContextPtr = std::shared_ptr<Context>;
+
 //
 // vars
 //
 
 // для работы со списком дескриптором контекста
 std::mutex handleMutex;
-std::set<Context::Shared> handlesList;
+std::set<ContextPtr> handlesList;
 
 //
 std::set<std::shared_ptr<std::thread>> threadsList;
@@ -304,7 +305,7 @@ void receive(const Handle &handle, const char *dataBlock, const size_t &dataBloc
 void disconnect(const Handle &handle)
 {
     std::lock_guard<std::mutex> lock(handleMutex);
-    const auto context = std::find_if(handlesList.cbegin(), handlesList.cend(), [handle](const Context::Shared &item)
+    const auto context = std::find_if(handlesList.cbegin(), handlesList.cend(), [handle](const ContextPtr &item)
     {
         return (item.get() == handle);
     });
